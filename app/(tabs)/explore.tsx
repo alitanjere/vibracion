@@ -1,5 +1,4 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Collapsible } from '@/components/ui/collapsible';
 import { ExternalLink } from '@/components/external-link';
@@ -9,15 +8,15 @@ import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
 
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+      headerBackgroundColor={{ light: '#D8F1FF', dark: '#102334' }}
       headerImage={
         <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
+          size={300}
+          color="#0284C7"
+          name="waveform.path.ecg"
           style={styles.headerImage}
         />
       }>
@@ -27,72 +26,65 @@ export default function TabTwoScreen() {
           style={{
             fontFamily: Fonts.rounded,
           }}>
-          Explore
+          Guía de vibraciones
         </ThemedText>
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
+
+      <ThemedText style={styles.paragraph}>
+        Aprende a combinar respuestas hápticas para reforzar acciones importantes y mejorar la accesibilidad
+        de tus flujos. Aquí encontrarás recomendaciones para documentar patrones y evitar fatiga en la
+        experiencia de uso.
+      </ThemedText>
+
+      <Collapsible title="Tipos de respuesta rápida">
         <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
+          Las opciones del inicio utilizan <ThemedText type="defaultSemiBold">expo-haptics</ThemedText> para
+          disparar respuestas nativas. Prueba cada combinación y toma nota de la sensación generada.
+        </ThemedText>
+        <ThemedText style={styles.bullet}>{'\u2022 '}Impactos: ligeros, medios y pesados. Úsalos para
+          confirmar acciones según su prioridad.</ThemedText>
+        <ThemedText style={styles.bullet}>{'\u2022 '}Notificaciones: combinan vibraciones con diferentes
+          intensidades y son útiles para estados como éxito, error o advertencia.</ThemedText>
+      </Collapsible>
+
+      <Collapsible title="Construye un patrón personalizado">
+        <ThemedText>
+          Ajusta la duración del pulso y de la pausa en milisegundos. Con{' '}
+          <ThemedText type="defaultSemiBold">Repeticiones</ThemedText> defines cuántas veces se ejecuta el
+          ciclo antes de detenerse.
         </ThemedText>
         <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
+          Activa la opción <ThemedText type="defaultSemiBold">Repetir hasta detener</ThemedText> para dejarlo
+          funcionando en loop y evalúa la reacción del usuario al detener manualmente la vibración.
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
+        <ThemedText style={styles.note}>
+          Nota: Los patrones personalizados sólo están disponibles en dispositivos Android. En iOS utiliza los
+          impactos y notificaciones rápidas.
+        </ThemedText>
+      </Collapsible>
+
+      <Collapsible title="Buenas prácticas de diseño">
+        <ThemedText style={styles.bullet}>{'\u2022 '}Mantén sesiones de prueba cortas para evitar
+          fatiga. Un patrón excesivo puede generar incomodidad.</ThemedText>
+        <ThemedText style={styles.bullet}>{'\u2022 '}Documenta tus configuraciones (pulso, pausa y
+          repeticiones) para replicarlas fácilmente en siguientes iteraciones.</ThemedText>
+        <ThemedText style={styles.bullet}>{'\u2022 '}Combina la vibración con otros canales de feedback,
+          como cambios de color o mensajes en pantalla.</ThemedText>
+      </Collapsible>
+
+      <Collapsible title="Recursos recomendados">
+        <ThemedText>
+          Revisa estas guías para profundizar en la implementación de vibraciones y patrones hápticos:
+        </ThemedText>
+        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/haptics/">
+          <ThemedText type="link">Documentación de expo-haptics</ThemedText>
         </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
+        <ExternalLink href="https://reactnative.dev/docs/vibration">
+          <ThemedText type="link">API Vibration de React Native</ThemedText>
         </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
+        <ExternalLink href="https://material.io/design/platform-guidance/android-haptics.html">
+          <ThemedText type="link">Guía de patrones hápticos de Material Design</ThemedText>
         </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
       </Collapsible>
     </ParallaxScrollView>
   );
@@ -100,13 +92,28 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   headerImage: {
-    color: '#808080',
     bottom: -90,
-    left: -35,
+    left: -45,
     position: 'absolute',
   },
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  paragraph: {
+    marginBottom: 12,
+    lineHeight: 22,
+    fontSize: 15,
+  },
+  bullet: {
+    marginTop: 8,
+    lineHeight: 20,
+    fontSize: 14,
+  },
+  note: {
+    marginTop: 12,
+    lineHeight: 20,
+    fontSize: 14,
+    fontStyle: 'italic',
   },
 });
